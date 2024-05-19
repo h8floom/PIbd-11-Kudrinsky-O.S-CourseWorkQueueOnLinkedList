@@ -11,7 +11,7 @@ public class QueueManager<T>
 
     public QueueManager(QueueParameters parameters, MainForm form)
     {
-        queue = new QueueLinkedList<T>();
+        queue = new QueueLinkedList<T>(parameters); // Передаем параметры в конструктор очереди
         storage = new QueueStorage();
         mainForm = form;
     }
@@ -33,7 +33,7 @@ public class QueueManager<T>
                 return; // Завершаем выполнение метода, чтобы избежать вызова queue.Dequeue()
             }
             queue.Dequeue();
-            storage.AddState(queue.CreateMemento()); // Передача экземпляра queue
+            storage.AddState(queue.SaveState()); // Передача экземпляра queue
             mainForm.UpdateQueue();
         }
         else if (operation == "Enqueue" && !EqualityComparer<T>.Default.Equals(element, default(T)))
@@ -64,8 +64,16 @@ public class QueueManager<T>
 
     private void HandleEnqueueClicked(int element) // Обработчик события
     {
-        queue.Enqueue((T)(object)element); // Приведение к типу T
-        storage.AddState(queue.CreateMemento());
-        mainForm.UpdateQueue();
+        try
+        {
+            queue.Enqueue((T)(object)element); // Приведение к типу T
+            storage.AddState(queue.SaveState());
+            mainForm.UpdateQueue();
+        }
+        catch (InvalidOperationException ex)
+        {
+            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
     }
 }
+

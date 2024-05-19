@@ -69,11 +69,11 @@
             // labelAddElement
             // 
             labelAddElement.AutoSize = true;
-            labelAddElement.Location = new Point(330, 9);
+            labelAddElement.Location = new Point(316, 9);
             labelAddElement.Name = "labelAddElement";
-            labelAddElement.Size = new Size(182, 32);
+            labelAddElement.Size = new Size(221, 32);
             labelAddElement.TabIndex = 2;
-            labelAddElement.Text = "Введите число:";
+            labelAddElement.Text = "Введите значение:";
             // 
             // textBox
             // 

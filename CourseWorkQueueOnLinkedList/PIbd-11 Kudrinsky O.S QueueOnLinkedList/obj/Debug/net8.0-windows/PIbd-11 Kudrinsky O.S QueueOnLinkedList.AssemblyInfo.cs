@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PIbd-11 Kudrinsky O.S QueueOnLinkedList")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7a7ca1862f6be8acba40183a57635dea7df849a4")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
 [assembly: System.Reflection.AssemblyProductAttribute("PIbd-11 Kudrinsky O.S QueueOnLinkedList")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PIbd-11 Kudrinsky O.S QueueOnLinkedList")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -9,19 +9,42 @@ public partial class MainForm : Form
     private QueueManager<int> queueManager;
     private QueueVisualizer queueVisualizer;
     private QueueStorage queueStorage;
+    private bool maxSizeSet = false; // Флаг, указывающий, был ли установлен максимальный размер
 
     public MainForm()
     {
         InitializeComponent();
-        queueManager = new QueueManager<int>(new QueueParameters(5), this); // Начальные параметры очереди
+    }
+
+    // Метод для инициализации QueueManager
+    private void InitializeQueueManager(int maxSize)
+    {
+        queueManager = new QueueManager<int>(new QueueParameters(maxSize), this); // Начальные параметры очереди
         queueVisualizer = new QueueVisualizer();
         queueStorage = new QueueStorage();
     }
 
     private void buttonAddElement_Click(object sender, EventArgs e)
     {
-        queueManager.ExecuteOperation("Enqueue");
+        // Проверяем, был ли уже установлен максимальный размер
+        if (!maxSizeSet)
+        {
+            // Если не был установлен, показываем форму для установки максимального размера
+            SetMaxForm maxSizeForm = new SetMaxForm();
+            if (maxSizeForm.ShowDialog() == DialogResult.OK)
+            {
+                InitializeQueueManager(maxSizeForm.MaxSize); // Инициализируем QueueManager с установленным максимальным размером
+                maxSizeSet = true; // Устанавливаем флаг, что максимальный размер был установлен
+            }
+        }
+        else
+        {
+            // Если максимальный размер уже был установлен, выполняем операцию добавления элемента
+            queueManager.ExecuteOperation("Enqueue");
+        }
     }
+
+
 
     private void buttonDeleteElement_Click(object sender, EventArgs e)
     {

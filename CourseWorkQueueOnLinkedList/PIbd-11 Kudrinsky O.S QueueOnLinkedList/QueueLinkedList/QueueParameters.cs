@@ -2,7 +2,6 @@
 
 public class QueueParameters
 {
-    // Максимальный размер очереди
     public int MaxSize { get; set; }
 
     public QueueParameters(int maxSize)

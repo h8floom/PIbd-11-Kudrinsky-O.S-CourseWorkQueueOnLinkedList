@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\floom\\source\\repos\\CourseWork\\CourseWorkQueueOnLinkedList\\PIbd-11 Kudrinsky O.S QueueOnLinkedList\\PIbd-11 Kudrinsky O.S QueueOnLinkedList.csproj": {}
+    "C:\\Users\\floom\\Source\\Repos\\PIbd-11-Kudrinsky-O.S-CourseWorkQueueOnLinkedList\\CourseWorkQueueOnLinkedList\\PIbd-11 Kudrinsky O.S QueueOnLinkedList\\PIbd-11 Kudrinsky O.S QueueOnLinkedList.csproj": {}
   },
   "projects": {
-    "C:\\Users\\floom\\source\\repos\\CourseWork\\CourseWorkQueueOnLinkedList\\PIbd-11 Kudrinsky O.S QueueOnLinkedList\\PIbd-11 Kudrinsky O.S QueueOnLinkedList.csproj": {
+    "C:\\Users\\floom\\Source\\Repos\\PIbd-11-Kudrinsky-O.S-CourseWorkQueueOnLinkedList\\CourseWorkQueueOnLinkedList\\PIbd-11 Kudrinsky O.S QueueOnLinkedList\\PIbd-11 Kudrinsky O.S QueueOnLinkedList.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\floom\\source\\repos\\CourseWork\\CourseWorkQueueOnLinkedList\\PIbd-11 Kudrinsky O.S QueueOnLinkedList\\PIbd-11 Kudrinsky O.S QueueOnLinkedList.csproj",
+        "projectUniqueName": "C:\\Users\\floom\\Source\\Repos\\PIbd-11-Kudrinsky-O.S-CourseWorkQueueOnLinkedList\\CourseWorkQueueOnLinkedList\\PIbd-11 Kudrinsky O.S QueueOnLinkedList\\PIbd-11 Kudrinsky O.S QueueOnLinkedList.csproj",
         "projectName": "PIbd-11 Kudrinsky O.S QueueOnLinkedList",
-        "projectPath": "C:\\Users\\floom\\source\\repos\\CourseWork\\CourseWorkQueueOnLinkedList\\PIbd-11 Kudrinsky O.S QueueOnLinkedList\\PIbd-11 Kudrinsky O.S QueueOnLinkedList.csproj",
+        "projectPath": "C:\\Users\\floom\\Source\\Repos\\PIbd-11-Kudrinsky-O.S-CourseWorkQueueOnLinkedList\\CourseWorkQueueOnLinkedList\\PIbd-11 Kudrinsky O.S QueueOnLinkedList\\PIbd-11 Kudrinsky O.S QueueOnLinkedList.csproj",
         "packagesPath": "C:\\Users\\floom\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\floom\\source\\repos\\CourseWork\\CourseWorkQueueOnLinkedList\\PIbd-11 Kudrinsky O.S QueueOnLinkedList\\obj\\",
+        "outputPath": "C:\\Users\\floom\\Source\\Repos\\PIbd-11-Kudrinsky-O.S-CourseWorkQueueOnLinkedList\\CourseWorkQueueOnLinkedList\\PIbd-11 Kudrinsky O.S QueueOnLinkedList\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

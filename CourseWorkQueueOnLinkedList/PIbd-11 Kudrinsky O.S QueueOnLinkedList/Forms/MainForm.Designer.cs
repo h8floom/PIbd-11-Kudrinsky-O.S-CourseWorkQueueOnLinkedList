@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             groupBox = new GroupBox();
+            buttonSetMaxSize = new Button();
             buttonInformation = new Button();
             buttonUpdate = new Button();
             buttonDeleteElement = new Button();
@@ -38,6 +39,7 @@
             FileToolStripMenuItem = new ToolStripMenuItem();
             SaveToolStripMenuItem = new ToolStripMenuItem();
             LoadToolStripMenuItem = new ToolStripMenuItem();
+            labelQueueSize = new Label();
             groupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             menuStrip1.SuspendLayout();
@@ -45,6 +47,8 @@
             // 
             // groupBox
             // 
+            groupBox.Controls.Add(labelQueueSize);
+            groupBox.Controls.Add(buttonSetMaxSize);
             groupBox.Controls.Add(buttonInformation);
             groupBox.Controls.Add(buttonUpdate);
             groupBox.Controls.Add(buttonDeleteElement);
@@ -55,6 +59,17 @@
             groupBox.TabIndex = 0;
             groupBox.TabStop = false;
             groupBox.Text = "Панель инструментов";
+            // 
+            // buttonSetMaxSize
+            // 
+            buttonSetMaxSize.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            buttonSetMaxSize.Location = new Point(6, 178);
+            buttonSetMaxSize.Name = "buttonSetMaxSize";
+            buttonSetMaxSize.Size = new Size(388, 46);
+            buttonSetMaxSize.TabIndex = 4;
+            buttonSetMaxSize.Text = "Задать размер";
+            buttonSetMaxSize.UseVisualStyleBackColor = true;
+            buttonSetMaxSize.Click += buttonSetMaxSize_Click;
             // 
             // buttonInformation
             // 
@@ -70,7 +85,7 @@
             // buttonUpdate
             // 
             buttonUpdate.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            buttonUpdate.Location = new Point(6, 178);
+            buttonUpdate.Location = new Point(6, 610);
             buttonUpdate.Name = "buttonUpdate";
             buttonUpdate.Size = new Size(388, 46);
             buttonUpdate.TabIndex = 3;
@@ -141,6 +156,15 @@
             LoadToolStripMenuItem.Text = "Загрузить";
             LoadToolStripMenuItem.Click += LoadToolStripMenuItem_Click;
             // 
+            // labelQueueSize
+            // 
+            labelQueueSize.AutoSize = true;
+            labelQueueSize.Location = new Point(6, 271);
+            labelQueueSize.Name = "labelQueueSize";
+            labelQueueSize.Size = new Size(78, 32);
+            labelQueueSize.TabIndex = 3;
+            labelQueueSize.Text = "label1";
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
@@ -154,6 +178,7 @@
             Name = "MainForm";
             Text = "АТД Очередь";
             groupBox.ResumeLayout(false);
+            groupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
@@ -173,5 +198,7 @@
         private ToolStripMenuItem FileToolStripMenuItem;
         private ToolStripMenuItem SaveToolStripMenuItem;
         private ToolStripMenuItem LoadToolStripMenuItem;
+        private Button buttonSetMaxSize;
+        private Label labelQueueSize;
     }
 }

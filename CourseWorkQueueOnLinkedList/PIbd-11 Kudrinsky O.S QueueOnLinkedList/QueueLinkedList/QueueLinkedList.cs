@@ -1,7 +1,7 @@
 ﻿using PIbd_11_Kudrinsky_O.S_QueueOnLinkedList.States;
 using System;
-using System.Collections.Generic;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace PIbd_11_Kudrinsky_O.S_QueueOnLinkedList.QueueLinkedList
 {
@@ -80,6 +80,12 @@ namespace PIbd_11_Kudrinsky_O.S_QueueOnLinkedList.QueueLinkedList
             {
                 list.AddLast((T)Convert.ChangeType(item, typeof(T)));
             }
+        }
+
+        // Добавляем метод для обновления максимального размера очереди
+        public void SetMaxSize(int maxSize)
+        {
+            this.maxSize = maxSize;
         }
     }
 }

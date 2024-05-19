@@ -57,10 +57,11 @@ public class QueueManager<T>
         var lastState = storage.GetLastState();
         if (lastState != null)
         {
-            queue = new QueueLinkedList<T>();
+            queue.RestoreState(lastState); // Восстанавливаем состояние очереди из последнего сохраненного состояния
             mainForm.UpdateQueue();
         }
     }
+
 
     private void HandleEnqueueClicked(int element) // Обработчик события
     {
@@ -75,5 +76,11 @@ public class QueueManager<T>
             MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
     }
-}
 
+    public void UpdateMaxSize(int maxSize)
+    {
+        // Обновляем максимальный размер очереди
+        queue.SetMaxSize(maxSize);
+    }
+
+}

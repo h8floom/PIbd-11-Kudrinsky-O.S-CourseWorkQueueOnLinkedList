@@ -17,7 +17,7 @@ public partial class MainForm : Form
         labelQueueSize.Text = ""; // Изначально метка пустая
 
         // Инициализируем queueManager при запуске формы
-        InitializeQueueManager(5);
+        InitializeQueueManager(1);
     }
 
     private void InitializeQueueManager(int maxSize, bool updateLabel = false)

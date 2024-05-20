@@ -30,14 +30,13 @@ public class QueueVisualizer
                 int x = 10 + i * (rectangleWidth + distanceBetweenElements);
                 int y = (pictureBox.Height - rectangleHeight) / 2;
 
-                // Проверяем, помещается ли элемент в область визуализации
                 if (x + rectangleWidth <= pictureBox.Width)
                 {
-                    // Рисуем прямоугольник только если он помещается в область
+                    // прямоугольник (если помещается)
                     graphics.FillRectangle(Brushes.LightBlue, x, y, rectangleWidth, rectangleHeight);
                     graphics.DrawRectangle(Pens.Black, x, y, rectangleWidth, rectangleHeight);
 
-                    // Рисуем текст внутри прямоугольника
+                    // текст внутри прямоугольника
                     string text = item.ToString();
                     using (Font font = new Font("Tahoma", 10))
                     {
@@ -49,7 +48,6 @@ public class QueueVisualizer
                 }
                 else
                 {
-                    // Если элемент не помещается, выдаем сообщение пользователю
                     MessageBox.Show("Невозможно добавить элемент в очередь. Превышен размер формы.");
                     break;
                 }
@@ -58,6 +56,7 @@ public class QueueVisualizer
             }
         }
 
+        // установка созданного битмапа в pictureBox
         pictureBox.Image = bitmap;
     }
 

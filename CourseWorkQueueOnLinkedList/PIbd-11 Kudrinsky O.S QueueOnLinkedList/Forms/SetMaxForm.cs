@@ -1,15 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-
-namespace PIbd_11_Kudrinsky_O.S_QueueOnLinkedList.Forms;
+﻿namespace PIbd_11_Kudrinsky_O.S_QueueOnLinkedList.Forms;
 
 public partial class SetMaxForm : Form
 {
@@ -30,7 +19,7 @@ public partial class SetMaxForm : Form
         }
         else
         {
-            MessageBox.Show("Please enter a valid positive integer.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            MessageBox.Show("Введите корректный положительный int", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
     }
 

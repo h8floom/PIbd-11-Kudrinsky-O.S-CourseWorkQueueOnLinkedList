@@ -11,7 +11,7 @@ public class QueueManager<T>
 
     public QueueManager(QueueParameters parameters, MainForm form)
     {
-        queue = new QueueLinkedList<T>(parameters); // Передаем параметры в конструктор очереди
+        queue = new QueueLinkedList<T>(parameters);
         storage = new QueueStorage();
         mainForm = form;
     }
@@ -20,20 +20,19 @@ public class QueueManager<T>
     {
         if (operation == "Enqueue" && EqualityComparer<T>.Default.Equals(element, default(T)))
         {
-            // Вызов формы для ввода данных
             AddElementForm addElementForm = new AddElementForm();
-            addElementForm.AddClick += HandleEnqueueClicked; // Подключаем обработчик события
+            addElementForm.AddClick += HandleEnqueueClicked;
             addElementForm.Show();
         }
         else if (operation == "Dequeue")
         {
             if (queue.Count == 0)
             {
-                MessageBox.Show("Queue is empty!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return; // Завершаем выполнение метода, чтобы избежать вызова queue.Dequeue()
+                MessageBox.Show("Очередь пустая!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
             queue.Dequeue();
-            storage.AddState(queue.SaveState()); // Передача экземпляра queue
+            storage.AddState(queue.SaveState()); // передача экземпляра queue
             mainForm.UpdateQueue();
         }
         else if (operation == "Enqueue" && !EqualityComparer<T>.Default.Equals(element, default(T)))
@@ -57,17 +56,17 @@ public class QueueManager<T>
         var lastState = storage.GetLastState();
         if (lastState != null)
         {
-            queue.RestoreState(lastState); // Восстанавливаем состояние очереди из последнего сохраненного состояния
+            queue.RestoreState(lastState); // восстановление ластового состояния
             mainForm.UpdateQueue();
         }
     }
 
 
-    private void HandleEnqueueClicked(int element) // Обработчик события
+    private void HandleEnqueueClicked(int element) // обработчик события
     {
         try
         {
-            queue.Enqueue((T)(object)element); // Приведение к типу T
+            queue.Enqueue((T)(object)element);
             storage.AddState(queue.SaveState());
             mainForm.UpdateQueue();
         }
@@ -79,7 +78,6 @@ public class QueueManager<T>
 
     public void UpdateMaxSize(int maxSize)
     {
-        // Обновляем максимальный размер очереди
         queue.SetMaxSize(maxSize);
     }
 

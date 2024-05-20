@@ -1,28 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace PIbd_11_Kudrinsky_O.S_QueueOnLinkedList.Forms;
+﻿namespace PIbd_11_Kudrinsky_O.S_QueueOnLinkedList.Forms;
 
 public partial class InfoForm : Form
 {
     public InfoForm()
     {
         InitializeComponent();
-
-        // Вызываем метод LoadProgramInfo() при создании формы
         LoadProgramInfo();
     }
 
     private void LoadProgramInfo()
     {
-        // Здесь вы можете загрузить текст программы из файла, строки или из другого источника данных
         string programInfoText = "Описание программы:\n\n" +
                                  "Программа реализует абстрактный тип данных (АТД) \"очередь\" на основе односвязного списка. Очередь - это структура данных, работающая по принципу FIFO (First In, First Out), где первым добавленным элементом будет первым извлеченным. Реализация на односвязном списке обеспечивает эффективные операции добавления и удаления элементов из начала и конца очереди." +
                                  "" +
@@ -36,7 +23,6 @@ public partial class InfoForm : Form
                                  "" +
                                  "Пример использования\r\n\r\nПрограмма позволяет добавлять и удалять элементы из очереди, а также визуализировать текущее состояние очереди на форме. Пользователь может взаимодействовать с программой, добавляя и удаляя элементы, и наблюдая, как меняется состояние очереди в реальном времени.";
 
-        // Присваиваем текст программы элементу RichTextBox
         richTextBoxInfo.Text = programInfoText;
 
     }

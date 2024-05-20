@@ -62,7 +62,7 @@ namespace PIbd_11_Kudrinsky_O.S_QueueOnLinkedList.QueueLinkedList
             int index = 0;
             foreach (var item in list)
             {
-                result[index++] = Convert.ToInt32(item); // Преобразование элемента к типу int
+                result[index++] = Convert.ToInt32(item); // преобразование элемента к типу int
             }
             return result;
         }
@@ -82,7 +82,6 @@ namespace PIbd_11_Kudrinsky_O.S_QueueOnLinkedList.QueueLinkedList
             }
         }
 
-        // Добавляем метод для обновления максимального размера очереди
         public void SetMaxSize(int maxSize)
         {
             this.maxSize = maxSize;

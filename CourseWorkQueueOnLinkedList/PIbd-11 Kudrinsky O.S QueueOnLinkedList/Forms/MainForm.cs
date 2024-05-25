@@ -16,6 +16,7 @@ public partial class MainForm : Form
         InitializeComponent();
         labelQueueSize.Text = "";
         InitializeQueueManager(1);
+        UpdateButtonStates();
     }
 
     private void InitializeQueueManager(int maxSize, bool updateLabel = false)
@@ -25,6 +26,7 @@ public partial class MainForm : Form
             queueManager = new QueueManager<int>(new QueueParameters(maxSize), this);
             queueVisualizer = new QueueVisualizer();
             queueStorage = new QueueStorage();
+            UpdateButtonStates();
         }
 
         else
@@ -122,8 +124,24 @@ private void buttonAddElement_Click(object sender, EventArgs e)
         SetMaxForm maxSizeForm = new SetMaxForm();
         if (maxSizeForm.ShowDialog() == DialogResult.OK)
         {
-            InitializeQueueManager(maxSizeForm.MaxSize, true); // инициализация управленца с новым максимальным размером 
+            InitializeQueueManager(maxSizeForm.MaxSize, true);
             maxSizeSet = true;
+            UpdateButtonStates(); // Обновление состояния кнопок после установки размера очереди
         }
+    }
+
+    private void UpdateButtonStates()
+    {
+        // Установка состояния кнопок в зависимости от значения maxSizeSet
+        buttonAddElement.Enabled = maxSizeSet;
+        buttonDeleteElement.Enabled = maxSizeSet;
+
+        // Установка стиля кнопок в зависимости от их состояния
+        buttonAddElement.FlatStyle = maxSizeSet ? FlatStyle.Standard : FlatStyle.Flat;
+        buttonDeleteElement.FlatStyle = maxSizeSet ? FlatStyle.Standard : FlatStyle.Flat;
+
+        // Изменение цвета текста кнопок в зависимости от их состояния
+        buttonAddElement.ForeColor = maxSizeSet ? SystemColors.ControlText : SystemColors.GrayText;
+        buttonDeleteElement.ForeColor = maxSizeSet ? SystemColors.ControlText : SystemColors.GrayText;
     }
 }

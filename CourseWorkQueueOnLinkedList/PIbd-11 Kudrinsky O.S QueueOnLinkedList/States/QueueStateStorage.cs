@@ -1,91 +1,110 @@
-﻿using PIbd_11_Kudrinsky_O.S_QueueOnLinkedList.QueueLinkedList;
-using PIbd_11_Kudrinsky_O.S_QueueOnLinkedList.States;
+﻿using PIbd_11_Kudrinsky_O.S_QueueOnLinkedList.States;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
-public class QueueStorage
+namespace PIbd_11_Kudrinsky_O.S_QueueOnLinkedList.QueueLinkedList
 {
-    private List<QueueState> states;
-    private int currIndex = -1;
-
-    public QueueStorage()
+    public class QueueStorage
     {
-        states = new List<QueueState>();
-    }
+        private List<QueueState> states;
+        private int currIndex = -1;
 
-    public void AddState(QueueState state)
-    {
-        states.Add(state);
-    }
-
-    public IEnumerable<QueueState> GetStates()
-    {
-        return states;
-    }
-
-    public QueueState GetLastState()
-    {
-        return states.LastOrDefault();
-    }
-
-    public void ClearStates()
-    {
-        states.Clear();
-    }
-
-    public void SaveToFile(string filePath)
-    {
-        using (StreamWriter writer = new StreamWriter(filePath))
+        public QueueStorage()
         {
-            foreach (var state in states)
-            {
-                string line = string.Join(",", state.Array);
-                writer.WriteLine(line);
-            }
+            states = new List<QueueState>();
         }
-    }
 
-    public void LoadFromFile(string filePath)
-    {
-        states.Clear();
-        using (StreamReader reader = new StreamReader(filePath))
+        public void AddState(QueueState state)
         {
-            string line;
-            while ((line = reader.ReadLine()) != null)
+            states.Add(state);
+            currIndex = states.Count - 1; // Обновляем текущий индекс на последний добавленный элемент
+        }
+
+        public IEnumerable<QueueState> GetStates()
+        {
+            return states;
+        }
+
+        public QueueState GetLastState()
+        {
+            return states.LastOrDefault();
+        }
+
+        public void ClearStates()
+        {
+            states.Clear();
+            currIndex = -1; // Сбрасываем текущий индекс при очистке состояний
+        }
+
+        public void SaveToFile(string filePath)
+        {
+            using (StreamWriter writer = new StreamWriter(filePath))
             {
-                if (string.IsNullOrWhiteSpace(line))
+                foreach (var state in states)
                 {
-                    continue;
-                }
-                try
-                {
-                    int[] array = line.Split(',').Select(int.Parse).ToArray();
-                    QueueState state = new QueueState(array);
-                    states.Add(state);
-                }
-                catch (FormatException ex)
-                {
-                    System.Diagnostics.Debug.WriteLine($"Error parsing line: {line}. Exception: {ex.Message}");
+                    string line = string.Join(",", state.Array);
+                    writer.WriteLine(line);
                 }
             }
         }
-    }
 
-    public QueueState? GetNextStep()
-    {
-        if (currIndex < states.Count - 1) // Проверяем, что есть следующее состояние
+        public void LoadFromFile(string filePath)
         {
-            currIndex++;
-            return states[currIndex];
+            states.Clear();
+            currIndex = -1; // Сбрасываем текущий индекс при загрузке состояний
+            using (StreamReader reader = new StreamReader(filePath))
+            {
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    if (string.IsNullOrWhiteSpace(line))
+                    {
+                        continue;
+                    }
+                    try
+                    {
+                        int[] array = line.Split(',').Select(int.Parse).ToArray();
+                        QueueState state = new QueueState(array);
+                        states.Add(state);
+                    }
+                    catch (FormatException ex)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"Error parsing line: {line}. Exception: {ex.Message}");
+                    }
+                }
+            }
+            currIndex = states.Count - 1; // Устанавливаем текущий индекс на последний загруженный элемент
         }
-        return null; // Возвращаем null, если достигли последнего состояния
-    }
 
-    public QueueState? GetPreviousStep()
-    {
-        if (currIndex > 0) // Проверяем, что есть предыдущее состояние
+        public QueueState? GetNextStep()
         {
-            currIndex--;
-            return states[currIndex];
+            if (currIndex < states.Count - 1) // Проверяем, что есть следующее состояние
+            {
+                currIndex++;
+                return states[currIndex];
+            }
+            return null; // Возвращаем null, если достигли последнего состояния
         }
-        return null; // Возвращаем null, если достигли первого состояния или currIndex был равен -1
+
+        public QueueState? GetPreviousStep()
+        {
+            if (currIndex > 0) // Проверяем, что есть предыдущее состояние
+            {
+                currIndex--;
+                return states[currIndex];
+            }
+            return null; // Возвращаем null, если достигли первого состояния или currIndex был равен -1
+        }
+
+        public bool HasNextStep()
+        {
+            return currIndex < states.Count - 1;
+        }
+
+        public bool HasPreviousStep()
+        {
+            return currIndex > 0;
+        }
     }
 }

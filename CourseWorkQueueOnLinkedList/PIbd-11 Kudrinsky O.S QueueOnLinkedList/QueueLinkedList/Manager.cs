@@ -1,84 +1,104 @@
 ﻿using PIbd_11_Kudrinsky_O.S_QueueOnLinkedList.Forms;
 using PIbd_11_Kudrinsky_O.S_QueueOnLinkedList.States;
+using System.Collections.Generic;
 
-namespace PIbd_11_Kudrinsky_O.S_QueueOnLinkedList.QueueLinkedList;
-
-public class QueueManager<T>
+namespace PIbd_11_Kudrinsky_O.S_QueueOnLinkedList.QueueLinkedList
 {
-    private QueueLinkedList<T> queue;
-    public QueueStorage storage;
-    private MainForm mainForm;
-
-    public QueueManager(QueueParameters parameters, MainForm form)
+    public class QueueManager<T>
     {
-        queue = new QueueLinkedList<T>(parameters);
-        storage = new QueueStorage();
-        mainForm = form;
-    }
+        private QueueLinkedList<T> queue;
+        public QueueStorage storage;
+        private MainForm mainForm;
 
-    public void ExecuteOperation(string operation, T element = default)
-    {
-        if (operation == "Enqueue" && EqualityComparer<T>.Default.Equals(element, default(T)))
+        public QueueManager(QueueParameters parameters, MainForm form)
         {
-            AddElementForm addElementForm = new AddElementForm();
-            addElementForm.AddClick += HandleEnqueueClicked;
-            addElementForm.Show();
+            queue = new QueueLinkedList<T>(parameters);
+            storage = new QueueStorage();
+            mainForm = form;
         }
-        else if (operation == "Dequeue")
+
+        public void ExecuteOperation(string operation, T element = default)
         {
-            if (queue.Count == 0)
+            if (operation == "Enqueue" && EqualityComparer<T>.Default.Equals(element, default(T)))
             {
-                MessageBox.Show("Очередь пустая!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                AddElementForm addElementForm = new AddElementForm();
+                addElementForm.AddClick += HandleEnqueueClicked;
+                addElementForm.Show();
             }
-            queue.Dequeue();
-            storage.AddState(queue.SaveState()); // передача экземпляра queue
-            mainForm.UpdateQueue();
+            else if (operation == "Dequeue")
+            {
+                if (queue.Count == 0)
+                {
+                    MessageBox.Show("Очередь пустая!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                queue.Dequeue();
+                storage.AddState(queue.SaveState()); // передача экземпляра queue
+                mainForm.UpdateQueue();
+            }
+            else if (operation == "Enqueue" && !EqualityComparer<T>.Default.Equals(element, default(T)))
+            {
+                HandleEnqueueClicked((int)(object)element);
+            }
         }
-        else if (operation == "Enqueue" && !EqualityComparer<T>.Default.Equals(element, default(T)))
+
+        public IEnumerable<QueueState> GetStates()
         {
-            HandleEnqueueClicked((int)(object)element);
+            return storage.GetStates();
         }
-    }
 
-    public IEnumerable<QueueState> GetStates()
-    {
-        return storage.GetStates();
-    }
-
-    public void ClearStates()
-    {
-        storage.ClearStates();
-    }
-
-    public void SetCurrentStateToLast()
-    {
-        var lastState = storage.GetLastState();
-        if (lastState != null)
+        public void ClearStates()
         {
-            queue.RestoreState(lastState); // восстановление ластового состояния
-            mainForm.UpdateQueue();
+            storage.ClearStates();
         }
-    }
 
-
-    private void HandleEnqueueClicked(int element) // обработчик события
-    {
-        try
+        public void SetCurrentStateToLast()
         {
-            queue.Enqueue((T)(object)element);
-            storage.AddState(queue.SaveState());
-            mainForm.UpdateQueue();
+            var lastState = storage.GetLastState();
+            if (lastState != null)
+            {
+                queue.RestoreState(lastState); // восстановление последнего состояния
+                mainForm.UpdateQueue();
+            }
         }
-        catch (InvalidOperationException ex)
+
+        private void HandleEnqueueClicked(int element) // обработчик события
         {
-            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            try
+            {
+                queue.Enqueue((T)(object)element);
+                storage.AddState(queue.SaveState());
+                mainForm.UpdateQueue();
+            }
+            catch (InvalidOperationException ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        public void UpdateMaxSize(int maxSize)
+        {
+            queue.SetMaxSize(maxSize);
+        }
+
+        public QueueState? GetNextStep()
+        {
+            return storage.GetNextStep();
+        }
+
+        public QueueState? GetPreviousStep()
+        {
+            return storage.GetPreviousStep();
+        }
+
+        public bool HasNextStep()
+        {
+            return storage.HasNextStep();
+        }
+
+        public bool HasPreviousStep()
+        {
+            return storage.HasPreviousStep();
         }
     }
-
-    public void UpdateMaxSize(int maxSize)
-    {
-        queue.SetMaxSize(maxSize);
-    }
-
 }

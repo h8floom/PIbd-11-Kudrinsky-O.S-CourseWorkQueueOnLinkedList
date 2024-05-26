@@ -32,8 +32,9 @@
             buttonReset = new Button();
             buttonAddEl = new Button();
             labelAddElement = new Label();
-            textBox = new TextBox();
+            numericUpDown = new NumericUpDown();
             groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown).BeginInit();
             SuspendLayout();
             // 
             // groupBox1
@@ -75,12 +76,21 @@
             labelAddElement.TabIndex = 2;
             labelAddElement.Text = "Введите значение:";
             // 
-            // textBox
+            // numericUpDown
             // 
-            textBox.Location = new Point(283, 58);
-            textBox.Name = "textBox";
-            textBox.Size = new Size(280, 39);
-            textBox.TabIndex = 3;
+            numericUpDown.Location = new Point(306, 58);
+            numericUpDown.Maximum = new decimal(new int[] { int.MaxValue,
+            0,
+            0,
+            0 });
+            numericUpDown.Minimum = new decimal(new int[] {int.MinValue,
+            0,
+            0,
+            int.MinValue});
+            numericUpDown.Name = "numericUpDown";
+            numericUpDown.Size = new Size(240, 39);
+            numericUpDown.TabIndex = 3;
+            numericUpDown.ValueChanged += numericUpDown_ValueChanged;
             // 
             // AddElementForm
             // 
@@ -88,12 +98,13 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlDark;
             ClientSize = new Size(853, 248);
-            Controls.Add(textBox);
+            Controls.Add(numericUpDown);
             Controls.Add(labelAddElement);
             Controls.Add(groupBox1);
             Name = "AddElementForm";
             Text = "Добавление элемента";
             groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)numericUpDown).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -103,6 +114,6 @@
         private Label labelAddElement;
         private Button buttonReset;
         private Button buttonAddEl;
-        private TextBox textBox;
+        private NumericUpDown numericUpDown;
     }
 }

@@ -26,9 +26,7 @@ public partial class MainForm : Form
             queueManager = new QueueManager<int>(new QueueParameters(maxSize), this);
             queueVisualizer = new QueueVisualizer();
             queueStorage = new QueueStorage();
-            UpdateButtonStates();
         }
-
         else
         {
             // Если queueManager уже создан, обновляем максимальный размер
@@ -41,8 +39,22 @@ public partial class MainForm : Form
         }
     }
 
+    private void UpdateButtonStates()
+    {
+        // Установка состояния кнопок в зависимости от значения maxSizeSet
+        buttonAddElement.Enabled = maxSizeSet;
+        buttonDeleteElement.Enabled = maxSizeSet;
 
-private void buttonAddElement_Click(object sender, EventArgs e)
+        // Установка стиля кнопок в зависимости от их состояния
+        buttonAddElement.FlatStyle = maxSizeSet ? FlatStyle.Standard : FlatStyle.Flat;
+        buttonDeleteElement.FlatStyle = maxSizeSet ? FlatStyle.Standard : FlatStyle.Flat;
+
+        // Изменение цвета текста кнопок в зависимости от их состояния
+        buttonAddElement.ForeColor = maxSizeSet ? SystemColors.ControlText : SystemColors.GrayText;
+        buttonDeleteElement.ForeColor = maxSizeSet ? SystemColors.ControlText : SystemColors.GrayText;
+    }
+
+    private void buttonAddElement_Click(object sender, EventArgs e)
     {
         if (!maxSizeSet)
         {
@@ -50,6 +62,7 @@ private void buttonAddElement_Click(object sender, EventArgs e)
             return;
         }
         queueManager.ExecuteOperation("Enqueue");
+        UpdateQueue();
     }
 
     private void buttonDeleteElement_Click(object sender, EventArgs e)
@@ -92,24 +105,13 @@ private void buttonAddElement_Click(object sender, EventArgs e)
                 UpdateQueue();
                 labelQueueSize.Text = "";
                 maxSizeSet = false;
+                UpdateButtonStates();
                 MessageBox.Show("Стадии загружены успешно!");
             }
             else
             {
                 MessageBox.Show("Класс-управленец не инициализирован", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-    }
-
-
-    private void buttonSave_Click(object sender, EventArgs e)
-    {
-        SaveFileDialog saveFileDialog = new SaveFileDialog();
-        saveFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
-        if (saveFileDialog.ShowDialog() == DialogResult.OK)
-        {
-            queueManager.storage.SaveToFile(saveFileDialog.FileName);
-            MessageBox.Show("States saved successfully!");
         }
     }
 
@@ -124,24 +126,27 @@ private void buttonAddElement_Click(object sender, EventArgs e)
         SetMaxForm maxSizeForm = new SetMaxForm();
         if (maxSizeForm.ShowDialog() == DialogResult.OK)
         {
-            InitializeQueueManager(maxSizeForm.MaxSize, true);
+            InitializeQueueManager(maxSizeForm.MaxSize, true); // инициализация управленца с новым максимальным размером 
             maxSizeSet = true;
             UpdateButtonStates(); // Обновление состояния кнопок после установки размера очереди
         }
     }
 
-    private void UpdateButtonStates()
+    private void buttonForwardStep_Click(object sender, EventArgs e)
     {
-        // Установка состояния кнопок в зависимости от значения maxSizeSet
-        buttonAddElement.Enabled = maxSizeSet;
-        buttonDeleteElement.Enabled = maxSizeSet;
+        var previousStep = queueManager.storage.GetNextStep();
+        if (previousStep != null)
+        {
+            queueVisualizer.Visualize(previousStep, this);
+        }
+    }
 
-        // Установка стиля кнопок в зависимости от их состояния
-        buttonAddElement.FlatStyle = maxSizeSet ? FlatStyle.Standard : FlatStyle.Flat;
-        buttonDeleteElement.FlatStyle = maxSizeSet ? FlatStyle.Standard : FlatStyle.Flat;
-
-        // Изменение цвета текста кнопок в зависимости от их состояния
-        buttonAddElement.ForeColor = maxSizeSet ? SystemColors.ControlText : SystemColors.GrayText;
-        buttonDeleteElement.ForeColor = maxSizeSet ? SystemColors.ControlText : SystemColors.GrayText;
+    private void buttonBackStep_Click(object sender, EventArgs e)
+    {
+        var nextStep = queueManager.storage.GetPreviousStep();
+        if (nextStep != null)
+        {
+            queueVisualizer.Visualize(nextStep, this);
+        }
     }
 }

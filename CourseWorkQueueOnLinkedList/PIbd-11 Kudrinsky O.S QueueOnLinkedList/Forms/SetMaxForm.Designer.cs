@@ -31,9 +31,10 @@
             groupBox1 = new GroupBox();
             buttonSetMaxSizeReset = new Button();
             buttonSetMaxSize = new Button();
-            textBoxSetMaxSize = new TextBox();
             label1 = new Label();
+            numericUpDownSize = new NumericUpDown();
             groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)numericUpDownSize).BeginInit();
             SuspendLayout();
             // 
             // groupBox1
@@ -66,21 +67,23 @@
             buttonSetMaxSize.UseVisualStyleBackColor = true;
             buttonSetMaxSize.Click += buttonSetMaxSize_Click;
             // 
-            // textBoxSetMaxSize
-            // 
-            textBoxSetMaxSize.Location = new Point(242, 77);
-            textBoxSetMaxSize.Name = "textBoxSetMaxSize";
-            textBoxSetMaxSize.Size = new Size(329, 39);
-            textBoxSetMaxSize.TabIndex = 1;
-            // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(253, 32);
+            label1.Location = new Point(265, 37);
             label1.Name = "label1";
             label1.Size = new Size(299, 32);
             label1.TabIndex = 2;
             label1.Text = "Введите размер очереди:";
+            // 
+            // numericUpDownSize
+            // 
+            numericUpDownSize.Location = new Point(295, 89);
+            numericUpDownSize.Maximum = new decimal(new int[] { 1215752191, 23, 0, 0 });
+            numericUpDownSize.Name = "numericUpDownSize";
+            numericUpDownSize.Size = new Size(240, 39);
+            numericUpDownSize.TabIndex = 3;
+            numericUpDownSize.ValueChanged += numericUpDownSize_ValueChanged;
             // 
             // SetMaxForm
             // 
@@ -88,12 +91,13 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlDark;
             ClientSize = new Size(827, 326);
+            Controls.Add(numericUpDownSize);
             Controls.Add(label1);
-            Controls.Add(textBoxSetMaxSize);
             Controls.Add(groupBox1);
             Name = "SetMaxForm";
             Text = "Размер очереди";
             groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)numericUpDownSize).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -103,7 +107,7 @@
         private GroupBox groupBox1;
         private Button buttonSetMaxSizeReset;
         private Button buttonSetMaxSize;
-        private TextBox textBoxSetMaxSize;
         private Label label1;
+        private NumericUpDown numericUpDownSize;
     }
 }

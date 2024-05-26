@@ -4,6 +4,7 @@ using PIbd_11_Kudrinsky_O.S_QueueOnLinkedList.States;
 public class QueueStorage
 {
     private List<QueueState> states;
+    private int currIndex = -1;
 
     public QueueStorage()
     {
@@ -66,5 +67,25 @@ public class QueueStorage
                 }
             }
         }
+    }
+
+    public QueueState? GetNextStep()
+    {
+        if (currIndex < states.Count - 1) // Проверяем, что есть следующее состояние
+        {
+            currIndex++;
+            return states[currIndex];
+        }
+        return null; // Возвращаем null, если достигли последнего состояния
+    }
+
+    public QueueState? GetPreviousStep()
+    {
+        if (currIndex > 0) // Проверяем, что есть предыдущее состояние
+        {
+            currIndex--;
+            return states[currIndex];
+        }
+        return null; // Возвращаем null, если достигли первого состояния или currIndex был равен -1
     }
 }

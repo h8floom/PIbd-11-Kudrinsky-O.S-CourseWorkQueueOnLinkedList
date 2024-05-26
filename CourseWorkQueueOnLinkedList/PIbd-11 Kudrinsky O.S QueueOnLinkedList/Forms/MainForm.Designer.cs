@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             groupBox = new GroupBox();
+            labelQueueSize = new Label();
             buttonSetMaxSize = new Button();
             buttonInformation = new Button();
             buttonUpdate = new Button();
@@ -39,7 +40,8 @@
             FileToolStripMenuItem = new ToolStripMenuItem();
             SaveToolStripMenuItem = new ToolStripMenuItem();
             LoadToolStripMenuItem = new ToolStripMenuItem();
-            labelQueueSize = new Label();
+            buttonBackStep = new Button();
+            buttonForwardStep = new Button();
             groupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             menuStrip1.SuspendLayout();
@@ -47,6 +49,8 @@
             // 
             // groupBox
             // 
+            groupBox.Controls.Add(buttonForwardStep);
+            groupBox.Controls.Add(buttonBackStep);
             groupBox.Controls.Add(labelQueueSize);
             groupBox.Controls.Add(buttonSetMaxSize);
             groupBox.Controls.Add(buttonInformation);
@@ -59,6 +63,15 @@
             groupBox.TabIndex = 0;
             groupBox.TabStop = false;
             groupBox.Text = "Панель инструментов";
+            // 
+            // labelQueueSize
+            // 
+            labelQueueSize.AutoSize = true;
+            labelQueueSize.Location = new Point(6, 271);
+            labelQueueSize.Name = "labelQueueSize";
+            labelQueueSize.Size = new Size(78, 32);
+            labelQueueSize.TabIndex = 3;
+            labelQueueSize.Text = "label1";
             // 
             // buttonSetMaxSize
             // 
@@ -156,14 +169,27 @@
             LoadToolStripMenuItem.Text = "Загрузить";
             LoadToolStripMenuItem.Click += LoadToolStripMenuItem_Click;
             // 
-            // labelQueueSize
+            // buttonBackStep
             // 
-            labelQueueSize.AutoSize = true;
-            labelQueueSize.Location = new Point(6, 271);
-            labelQueueSize.Name = "labelQueueSize";
-            labelQueueSize.Size = new Size(78, 32);
-            labelQueueSize.TabIndex = 3;
-            labelQueueSize.Text = "label1";
+            buttonBackStep.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            buttonBackStep.Location = new Point(6, 409);
+            buttonBackStep.Name = "buttonBackStep";
+            buttonBackStep.Size = new Size(186, 46);
+            buttonBackStep.TabIndex = 5;
+            buttonBackStep.Text = "Назад";
+            buttonBackStep.UseVisualStyleBackColor = true;
+            buttonBackStep.Click += buttonBackStep_Click;
+            // 
+            // buttonForwardStep
+            // 
+            buttonForwardStep.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            buttonForwardStep.Location = new Point(208, 409);
+            buttonForwardStep.Name = "buttonForwardStep";
+            buttonForwardStep.Size = new Size(186, 46);
+            buttonForwardStep.TabIndex = 6;
+            buttonForwardStep.Text = "Вперед";
+            buttonForwardStep.UseVisualStyleBackColor = true;
+            buttonForwardStep.Click += buttonForwardStep_Click;
             // 
             // MainForm
             // 
@@ -200,5 +226,7 @@
         private ToolStripMenuItem LoadToolStripMenuItem;
         private Button buttonSetMaxSize;
         private Label labelQueueSize;
+        private Button buttonBackStep;
+        private Button buttonForwardStep;
     }
 }

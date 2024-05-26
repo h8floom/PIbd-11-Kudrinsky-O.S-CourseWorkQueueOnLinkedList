@@ -13,21 +13,26 @@ public partial class AddElementForm : Form
 
     private void buttonAddEl_Click(object sender, EventArgs e)
     {
-        int number;
-        if (int.TryParse(textBox.Text, out number))
+        if (numericUpDown.Value > int.MaxValue)
         {
-            AddClick?.Invoke(number);
-            Close();
+            MessageBox.Show("Введите корректный int", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
         else
         {
-            MessageBox.Show("Введите корректный int");
+            int element = (int)numericUpDown.Value;
+            AddClick?.Invoke(element);
+            Close();
         }
     }
 
     private void buttonReset_Click(object sender, EventArgs e)
     {
-        textBox.Text = string.Empty;
+        numericUpDown.Value = 0;
+    }
+
+    private void numericUpDown_ValueChanged(object sender, EventArgs e)
+    {
+
     }
 }
 

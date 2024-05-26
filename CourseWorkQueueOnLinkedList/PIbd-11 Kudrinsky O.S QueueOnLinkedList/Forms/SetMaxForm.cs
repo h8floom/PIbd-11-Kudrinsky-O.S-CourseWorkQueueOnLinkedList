@@ -11,20 +11,29 @@ public partial class SetMaxForm : Form
 
     private void buttonSetMaxSize_Click(object sender, EventArgs e)
     {
-        if (int.TryParse(textBoxSetMaxSize.Text, out int maxSize) && maxSize > 0)
+        if (numericUpDownSize.Value > int.MaxValue)
         {
-            MaxSize = maxSize;
+            MessageBox.Show("Введите корректный int", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
+        else if (numericUpDownSize.Value > 0)
+        {
+            MaxSize = (int)numericUpDownSize.Value;
             DialogResult = DialogResult.OK;
             Close();
         }
         else
         {
-            MessageBox.Show("Введите корректный положительный int", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            MessageBox.Show("Введите корректное положительное значение", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
     }
 
     private void buttonSetMaxSizeReset_Click(object sender, EventArgs e)
     {
-        textBoxSetMaxSize.Text = string.Empty;
+        numericUpDownSize.Value = 0;
+    }
+
+    private void numericUpDownSize_ValueChanged(object sender, EventArgs e)
+    {
+        // Дополнительная логика, если необходимо
     }
 }
